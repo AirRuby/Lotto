@@ -1,0 +1,61 @@
+h4, h1
+{
+    color: lightblue;
+}
+
+.midden
+{
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+}
+
+form
+{
+    text-align: center;
+    text-decoration: none;
+}
+
+label
+{
+    width: 150px;
+    display: inline-block;
+    margin: 5px;
+    text-align: left;
+    color: white;
+}
+
+input,select,textarea
+{
+    width: 500px;
+}
+
+input[type="submit"]
+{
+    width: 200px;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+@media screen and (max-width: 1100px)
+{
+    .midden
+    {
+        display: grid;
+        grid-template-columns: repeat(2,auto);
+    }
+
+}
+
+@media screen and (max-width: 750px)
+{
+    .midden
+    {
+        display: grid;
+        grid-template-columns: repeat(1,auto);
+    }
+
+    input,select,textarea
+    {
+        width: 300px;
+    }
+}
