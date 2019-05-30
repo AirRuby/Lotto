@@ -1,6 +1,13 @@
-h4, h1
+h1
+{
+    color: deepskyblue;
+    text-align: center;
+}
+
+h4
 {
     color: lightblue;
+    text-align: center;
 }
 
 .midden

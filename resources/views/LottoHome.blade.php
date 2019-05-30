@@ -5,6 +5,8 @@
         <div></div>
         <h1>Home</h1><br>
         <p></p>
-        <h2>Welkom op de lotto pagina</h2>
+        <h4>Welkom op de lotto pagina</h4><br>
+        <p></p>
+        <img src="/images/lotto.png">
     </div>
 @endsection

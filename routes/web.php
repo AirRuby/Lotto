@@ -11,13 +11,14 @@
 |
 */
 
+//authenticatie routes
 Auth::routes();
 
 //route naar homepagina van Lotto
-Route::get('/', function () {return view('LottoHome');});
+Route::get('/','LottoController@Home')->name('Home');
 
 //route naar LottoTrekking
-Route::get('/Trekking', function () {return view('LottoTrekking');});
+Route::get('/Trekking','LottoController@Trekking')->name('Trekking');
 
 //route van LottoTrekking
-Route::Post('/Trekking', function () {return view('LottoTrekking');});
+route::post('/Trekking','LottoController@LottoTrekking')->name('LottoTrekking');
