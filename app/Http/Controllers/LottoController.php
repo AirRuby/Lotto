@@ -18,53 +18,79 @@ class LottoController extends Controller
         return view('LottoTrekking');
     }
 
-    public function LottoTrekking()
+    public function LottoTrekking(Request $request)
     {
-        $this->Ingave();
-        echo '<br>';
+        $ar_validatie = array
+        (
+            'getal0' => 'required|integer|numeric|max:45|min:1',
+            'getal1' => 'required|integer|numeric|max:45|min:1',
+            'getal2' => 'required|integer|numeric|max:45|min:1',
+            'getal3' => 'required|integer|numeric|max:45|min:1',
+            'getal4' => 'required|integer|numeric|max:45|min:1',
+            'getal5' => 'required|integer|numeric|max:45|min:1'
+        );
+        $this->validate($request, $ar_validatie);
+
         $this->Lotto();
-    }
 
-    Private function Ingave()
-    {
-        $getal1 = $_POST['getal1'];
-        $getal2 = $_POST['getal2'];
-        $getal3 = $_POST['getal3'];
-        $getal4 = $_POST['getal4'];
-        $getal5 = $_POST['getal5'];
-        $getal6 = $_POST['getal6'];
-
-        echo '<img src="/images/'.$getal1.'.png">';
-        echo '<img src="/images/'.$getal2.'.png">';
-        echo '<img src="/images/'.$getal3.'.png">';
-        echo '<img src="/images/'.$getal4.'.png">';
-        echo '<img src="/images/'.$getal5.'.png">';
-        echo '<img src="/images/'.$getal6.'.png">';
     }
 
     private function Lotto()
     {
-        $array = array();
-        $arrayAantal = 45;
+        $IngegevenGetal = array();
 
-        for ($i = 1; $i <= $arrayAantal; $i++)
+        echo'<h4>Onderstaand zijn de door u ingevulde getallen</h4>';
+
+        for($i = 0; $i <= 5; $i++)
+        {
+            $IngegevenGetal[$i] = $_POST['getal'.$i];
+            echo '<img src="/images/'.$IngegevenGetal[$i].'.png">';
+        }
+
+        echo '<br>';
+
+        echo'<h4>Onderstaand zijn de winnende lotto getallen</h4>';
+
+        $randomgetal = array();
+        $array = array();
+        for ($i = 1; $i <= 45; $i++)
         {
             array_push($array, $i);
         }
 
         $rand_keys = array_rand($array, 6);
-        $nr1 = $array[$rand_keys[0]] . "\n";
-        $nr2 = $array[$rand_keys[1]] . "\n";
-        $nr3 = $array[$rand_keys[2]] . "\n";
-        $nr4 = $array[$rand_keys[3]] . "\n";
-        $nr5 = $array[$rand_keys[4]] . "\n";
-        $nr6 = $array[$rand_keys[5]] . "\n";
 
-        echo '<img src="/images/'.$nr1.'.png">';
-        echo '<img src="/images/'.$nr2.'.png">';
-        echo '<img src="/images/'.$nr3.'.png">';
-        echo '<img src="/images/'.$nr4.'.png">';
-        echo '<img src="/images/'.$nr5.'.png">';
-        echo '<img src="/images/'.$nr6.'.png">';
+        for($j = 0; $j <= 5; $j++)
+        {
+            $randomgetal[$j] = $array[$rand_keys[$j]];
+            echo '<img src="/images/'.$randomgetal[$j].'.png">';
+        }
+
+        echo '<br>';
+
+        echo'<h4>Onderstaand zijn de overeenkomende lotto getallen</h4>';
+
+        $x = 0;
+
+        foreach ($IngegevenGetal as $ingegeven)
+        {
+            foreach ($randomgetal as $random)
+            {
+
+                if($random == $ingegeven)
+                {
+                    $x = 1;
+                    //$ar_Correct[] = $ingegeven;
+                    echo'<h4> Proficiat Getal '.'<img src="/images/'.$ingegeven.'.png">'.' was juist</h4>';
+                }
+            }
+        }
+
+        if($x == 0)
+        {
+            echo'<h4>Geen overeenkomende lotto cijfers</h4>';
+        }
+
+
     }
 }
